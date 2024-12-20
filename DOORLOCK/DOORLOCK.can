@@ -1,0 +1,28 @@
+/*@!Encoding:1252*/
+includes
+{
+  
+}
+variables
+{
+  int speed; // Current vehicle speed
+  int lockState = 0; // 0: Unlocked, 1: Locked
+}
+
+on message Vehicle_Speed_Message
+{
+  speed = this.Speed; // Extract speed signal from CAN message
+  
+  if (speed >= 20 && lockState == 0) 
+  {
+    output(Door_Lock_Control, 1); // Send lock command
+    lockState = 1;
+    write("Doors locked at speed: %d km/h", speed);
+  } 
+  else if (speed < 20 && lockState == 1) 
+  {
+    output(Door_Lock_Control, 0); // Send unlock command
+    lockState = 0;
+    write("Doors unlocked at speed: %d km/h", speed);
+  }
+}

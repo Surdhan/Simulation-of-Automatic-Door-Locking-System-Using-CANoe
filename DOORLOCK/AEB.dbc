@@ -1,0 +1,78 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: HMI AEB Engine
+VAL_TABLE_ RADAR 3 "Zone3 Warning" 2 "Zone2 Warning" 1 "Zone1 Warning" 0 "RADAR is OFF" ;
+VAL_TABLE_ Engine 1 "Engine is ON" 0 "Engine is OFF" ;
+
+
+BO_ 272 Brake_Message: 1 HMI
+ SG_ Brake_Signal : 0|8@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 288 Emergengy_Warning_Message: 3 AEB
+ SG_ Distance_Signal : 16|8@1- (1,0) [0|3] "" Vector__XXX
+ SG_ Speed_Signal : 8|8@1+ (1,0) [0|120] "" Vector__XXX
+ SG_ RADAR_Signal : 0|8@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 320 HMI_Message: 1 AEB
+ SG_ HMI_Signal : 0|8@1+ (1,0) [0|1] ""  HMI
+
+BO_ 304 Accelaration_Message_: 1 HMI
+ SG_ Accelaration_Signal : 0|8@1+ (1,0) [0|120] "" Vector__XXX
+
+BO_ 336 Engine_Message: 1 Engine
+ SG_ Engine_Signal : 0|8@1+ (1,0) [0|1] ""  HMI,AEB
+
+
+
+EV_ Env_Zone3: 0 [0|1] "" 0 1 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_Zone2: 0 [0|1] "" 0 2 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_Zone1: 0 [0|1] "" 0 3 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_RADAR: 0 [0|3] "" 0 4 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_Accelaration: 0 [0|288] "" 0 5 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_Brake: 0 [0|1] "" 0 6 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_Engine: 0 [0|1] "" 0 7 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+BA_DEF_  "BusType" STRING ;
+BA_DEF_DEF_  "BusType" "CAN";
+VAL_ Env_RADAR 3 "Zone3 Warning" 2 "Zone2 Warning" 1 "Zone1 Warning" 0 "RADAR is OFF" ;
+VAL_ Env_Engine 1 "Engine is ON" 0 "Engine is OFF" ;
+
